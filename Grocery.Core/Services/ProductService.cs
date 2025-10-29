@@ -18,19 +18,25 @@ namespace Grocery.Core.Services
             return _productRepository.GetAll();
         }
 
+        // UC19: nieuw product toevoegen (in-memory)
         public Product Add(Product item)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(item.Name))
+                throw new ArgumentException("Naam is verplicht.", nameof(item));
+            if (item.Price < 0)
+                throw new ArgumentException("Prijs moet ≥ 0 zijn.", nameof(item));
+
+            return _productRepository.Add(item);
         }
 
         public Product? Delete(Product item)
         {
-            throw new NotImplementedException();
+            return _productRepository.Delete(item);
         }
 
         public Product? Get(int id)
         {
-            throw new NotImplementedException();
+            return _productRepository.Get(id);
         }
 
         public Product? Update(Product item)
